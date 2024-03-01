@@ -1,16 +1,16 @@
-from flask import Flask, flash , render_template, request, redirect, url_for , send_from_directory
+from flask import Flask, render_template, request
 import numpy as np
 import tensorflow as tf
-from werkzeug.utils import secure_filename
+# from tensorflow import load_model
 from PIL import Image
 import os
+import smtplib
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-MODEL_PATH = 'downloads/DeepFake_Detector-main/my_model_1.h5'
-app.secret_key = "sex key"
+MODEL_PATH = 'C:\\Users\\vedant\\OneDrive\\Desktop\\Deepfake\\model\\my_model_1.h5'
+
 # Load the pre-trained model
 model = new_model = tf.keras.models.load_model(MODEL_PATH)
 
@@ -18,46 +18,26 @@ model = new_model = tf.keras.models.load_model(MODEL_PATH)
 def index():
     return render_template('index.html')
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/services')
-def services():
-    return render_template('services.html')
-
-@app.route('/portfolio')
-def portfolio():
-    return render_template('portfolio.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+@app.route('/', methods=['POST'])
+def submit_form():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        message = request.form['message']
+        send_email(name, email, phone, message)
+        return "Form submitted successfully!"
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     uploaded_file = request.files['file']
-    filename = secure_filename(uploaded_file.filename)
-    print(filename)
     if uploaded_file.filename != '':
         file_path = os.path.join(UPLOAD_FOLDER, uploaded_file.filename)
-        img_path = os.path.join('static/images', uploaded_file.filename)
         uploaded_file.save(file_path)
-        uploaded_file.save(img_path)
-        
-        flash('Image successfully uploaded')
         prediction = process_image(file_path)
-        return redirect(url_for('uploaded_file', filename=uploaded_file.filename))
+        return render_template('index.html', image=file_path, prediction=prediction)
     return render_template('index.html')
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    file_path = os.path.join(UPLOAD_FOLDER, filename)
-    prediction = process_image(file_path)
-    return render_template('uploaded_file.html', image=file_path, prediction=prediction)
-
-    
 def process_image(file_path):
     # Open and preprocess the image
     image = tf.io.read_file(file_path)
@@ -85,6 +65,39 @@ def process_image(file_path):
     prediction_label = f'{prediction_class}'
 
     return prediction_label
+#You require to use a less secured email for the cnnection and sending of email or it womnt happen , google stops the requets so keep thaat kn mind 
 
+
+def send_email(name_contact, sender_email, phone_contact, message):
+
+    # Set up the SMTP server
+    message = "Name: {}\nEmail of Sender: {}\nPhone: {}\nQuery: {}".format(name_contact, sender_email, phone_contact, message)
+
+    try:
+        sender = "ai.39.vedant.ranade@gmail.com"
+        recipient = "ai.39.vedant.ranade@gmail.com"
+        email_message = MIMEText(message)
+        email_message["Subject"] = "{} Trying to Contact".format(name_contact)
+        email_message["From"] = sender
+        email_message["To"] = recipient
+        print("Email drafted...")
+
+        # Use your Gmail account and App Password for secure connection
+        gmail_user = "your@gmail.com"
+        app_password = "your_app_password"
+
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender,"hosy zgdh uoti hvel")
+            server.sendmail(sender, recipient, email_message.as_string())
+            print("Email sent...")
+
+    except smtplib.SMTPAuthenticationError:
+        print("Email not sent. Authentication failed. Please check the sender's email and App Password.")
+    except smtplib.SMTPException as e:
+        print("Email not sent due to an SMTP error:", str(e))
+    except Exception as e:
+        print("Email not sent due to an unexpected error:", str(e))
+        
 if __name__ == '__main__':
     app.run(debug=True)
