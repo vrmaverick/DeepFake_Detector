@@ -41,12 +41,29 @@
         <div class="container px-4 px-lg-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="text mt-0">Your Trustworthy DeepFake Detection Partner</h2>
+                    <h2 class="text mt-0">This mini-project for SEM 6 was devloped to solve problems that rose due to rapid evolution of AI </h2>
                     <hr class="divider divider-light" />
-                    <p class="text-75 mb-4">Our platform offers state-of-the-art deepfake detection services, ensuring your media remains authentic and trustworthy. Start securing your content today!</p>
+                    <p class="text-75 mb-4">Our platform offers state-of-the-art deepfake detection services, ensuring your media remains authentic and trustworthy. Start Detecting and be cautious of the misinformation today!!</p>
                     <a class="btn btn-dark btn-xl" href="{{ url_for('services') }}">Get Started!</a>
                 </div>
-            </div>
+        </div>
+        <!-- Explanation images -->
+        < class="container mt-5">
+            <div class="image-container">
+                <img src="./static/img/batch.jpg" alt="Image 1">
+                <p>We have trained the model on 20,000 credible and diverse set of images to acheive about 97% accuracy in predictions</p>
+              </div>
+              <div class="image-container">
+                <img src="./static/img/val_accuracy.jpg" alt="Image 3">
+              </div>
+              <div class="image-container">
+                <img src="./static/img/neural.jpg" alt="Image 2">
+                <p>The above image uses Convolutional Neural Networks (CNNs) are adept at detecting deepfake images by learning intricate patterns and features present in the data. Through multiple layers of convolutions and pooling operations, CNNs extract hierarchical representations from images, capturing both low-level details and high-level features. This hierarchical feature learning enables CNNs to discern subtle discrepancies in texture, color, and spatial arrangements between real and deepfake images, empowering them to make accurate classifications</p>
+              </div>  
+              <div class="image-container">
+                <img src="./static/img/Prediction.jpg" alt="Image 4">
+                <p>Here is an example how an ai generated image was detected by our model the prompt was <b>"Tea spilled on pizza"</b></p>
+              </div>
         </div>
     </section>
 </body>
