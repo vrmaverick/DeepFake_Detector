@@ -67,7 +67,7 @@ def upload_file():
         uploaded_file.save(img_path)
         
         flash('Image successfully uploaded')
-        prediction = process_image(file_path)
+        prediction = process_image(img_path)
         # Apply watermark
         wm_image_path = apply_watermark(file_path, prediction)
         print(f'wm:{wm_image_path},file{filename}')
