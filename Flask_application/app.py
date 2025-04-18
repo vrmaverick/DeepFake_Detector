@@ -61,7 +61,8 @@ def upload_file():
     filename = secure_filename(uploaded_file.filename)
     if uploaded_file.filename != '':
         file_path = os.path.join(UPLOAD_FOLDER, filename)
-        img_path = os.path.join('static/images', filename)
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
         uploaded_file.save(file_path)
         uploaded_file.save(img_path)
         
