@@ -9,7 +9,8 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-MODEL_PATH = r'my_model_1.h5'
+# MODEL_PATH = r'my_model_1.h5'
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'my_model_1.h5')
 # MODEL_PATH = r'C://Users//vedant//Downloads//DF//DeepFake_Detector-main//Flask_application//my_model_1.h5'
 app.secret_key = "Argentavious"
 # Load the pre-trained model
