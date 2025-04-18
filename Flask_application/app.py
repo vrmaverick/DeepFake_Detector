@@ -6,7 +6,8 @@ from PIL import Image ,ImageDraw,ImageFont
 import os
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
+# UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static', 'images')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # MODEL_PATH = r'my_model_1.h5'
