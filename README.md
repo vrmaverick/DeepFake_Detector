@@ -71,6 +71,7 @@ flask run
 <ln>
 ## 🗂️ Folder Structure
   
+```bash
 Flask_application/
 │
 ├── static/
@@ -95,6 +96,7 @@ Testing/ # Codes and notebook used for testing the model
 Model/ # trained models .h5 and .keras format
 Updated.ipynb # A notebook used in training and testing
 Deepfake_Detector.ipynb # Initial model trained using this notebook it is the old copy
+```
 
 ## Contact
 * [LinkdIn](https://www.linkedin.com/in/vedant-ranade-683867271/)
