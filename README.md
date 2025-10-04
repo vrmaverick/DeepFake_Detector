@@ -7,7 +7,7 @@
   are now widely used for spreading hate speech and fake news.
   
 # Project Report
-[View My Report](https://vedant-ranade.netlify.app/static/media/mini_report.55e441ae371372989a4c.pdf) , This was our Third Year Project.
+[View My Report](https://github.com/vrmaverick/DeepFake_Detector/blob/main/DeepFake_Report.pdf). This was our third-year Year Project.
 
 # Data
 *We are using Kaggle data  uploaded on the drive can be downloaded from the following URL
