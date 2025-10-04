@@ -20,7 +20,7 @@ https://www.kaggle.com/datasets/ericji150/nsf-reu-2023-sd-21
 # Evaluation
 
 * Prediction Probabilities should be more than *90%* which is this project's goal to achieve
-* Our model achieved *97%* accuracy on the testing dataset
+* Our model achieved *96%* accuracy on the testing dataset
 
   # *Resources Referred for transfer learning*
 * *Kaggle models* = https://www.kaggle.com/models?tfhub-redirect=true
